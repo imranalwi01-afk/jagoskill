@@ -54,11 +54,15 @@ Di hosting, hasil akhirnya sebaiknya seperti ini:
 
 Pakai ini jika menu `Git Version Control` tersedia di cPanel.
 
-1. Clone repo GitHub `jagoskill` ke folder domain.
-2. Checkout branch `main`.
-3. Jalankan deploy dari hasil clone.
-4. Buat atau update `.env`.
-5. Jalankan Composer bila hosting mengizinkan terminal/SSH.
+1. Clone repo GitHub `jagoskill` lewat menu `Git Version Control`.
+2. Arahkan clone ke folder repository terpisah, misalnya:
+   `/home/USERNAME/repositories/jagoskill`
+3. Pastikan branch yang dipakai adalah `main`.
+4. Repo ini sudah menyediakan file [`.cpanel.yml`](D:\rocket\.cpanel.yml) dan script [deploy/cpanel-post-deploy.sh](D:\rocket\deploy\cpanel-post-deploy.sh).
+5. Saat tombol `Deploy HEAD Commit` dijalankan di cPanel, source akan disalin ke:
+   `$HOME/jagoskill.com`
+6. Buat atau update `.env` production di folder live `jagoskill.com`.
+7. Jika Composer tersedia di hosting, deploy script akan otomatis menjalankan `composer install --no-dev --optimize-autoloader`.
 
 ### Opsi B: Upload ZIP dari laptop
 
@@ -129,6 +133,14 @@ php artisan optimize:clear
 ```
 
 Jika `APP_KEY` sudah dibuat di lokal dan ingin dipakai ulang, tidak perlu generate lagi.
+
+## Catatan untuk Git deploy cPanel
+
+- Folder clone repository tidak harus sama dengan folder live domain
+- Justru lebih aman jika clone repo berada di luar folder publik/domain
+- Folder live yang dipakai saat ini adalah:
+  `$HOME/jagoskill.com`
+- File `.env` production harus dibuat langsung di folder live, bukan di repo lokal
 
 ## Storage link
 
