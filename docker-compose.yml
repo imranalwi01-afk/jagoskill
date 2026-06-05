@@ -1,0 +1,42 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rocket_app
+    ports:
+      - "8088:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+    environment:
+      APACHE_DOCUMENT_ROOT: /var/www/html/public
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    networks:
+      - rocket_net
+
+  db:
+    image: mariadb:10.11
+    container_name: rocket_db
+    restart: unless-stopped
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: rocket
+      MYSQL_USER: rocket
+      MYSQL_PASSWORD: rocket
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - rocket_net
+
+volumes:
+  db_data:
+
+networks:
+  rocket_net:
+    driver: bridge
