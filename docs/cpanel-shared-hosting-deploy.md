@@ -62,7 +62,8 @@ Pakai ini jika menu `Git Version Control` tersedia di cPanel.
 5. Saat tombol `Deploy HEAD Commit` dijalankan di cPanel, source akan disalin ke:
    `$HOME/public_html/jagoskill.com`
 6. Buat atau update `.env` production di folder live `jagoskill.com`.
-7. Jika Composer tersedia di hosting, deploy script akan otomatis menjalankan `composer install --no-dev --optimize-autoloader`.
+7. Deploy script hanya menyalin source code ke folder live agar proses cPanel tidak mudah stuck.
+8. Jalankan Composer dan Artisan secara manual hanya setelah source berhasil mendarat di folder live.
 
 ### Opsi B: Upload ZIP dari laptop
 
@@ -133,6 +134,15 @@ php artisan optimize:clear
 ```
 
 Jika `APP_KEY` sudah dibuat di lokal dan ingin dipakai ulang, tidak perlu generate lagi.
+
+Urutan manual yang saya sarankan di hosting:
+
+```bash
+cd ~/public_html/jagoskill.com
+composer install --no-dev --optimize-autoloader
+php artisan optimize:clear
+php artisan storage:link
+```
 
 ## Catatan untuk Git deploy cPanel
 

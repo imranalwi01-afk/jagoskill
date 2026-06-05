@@ -40,18 +40,3 @@ mkdir -p "$DEPLOYPATH/tests"
 if [ -f "$REPOPATH/.env.example" ]; then
   /bin/cp -a "$REPOPATH/.env.example" "$DEPLOYPATH/.env.example"
 fi
-
-if [ -d "$REPOPATH/public/assets" ]; then
-  /bin/mkdir -p "$DEPLOYPATH/public"
-fi
-
-if [ -x /opt/cpanel/composer/bin/composer ]; then
-  cd "$DEPLOYPATH"
-  /opt/cpanel/composer/bin/composer install --no-dev --optimize-autoloader
-fi
-
-if [ -f "$DEPLOYPATH/artisan" ] && [ -f "$DEPLOYPATH/.env" ]; then
-  cd "$DEPLOYPATH"
-  php artisan optimize:clear || true
-  php artisan storage:link || true
-fi
