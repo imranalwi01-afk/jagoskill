@@ -2,5 +2,5 @@
 deployment:
   tasks:
     - export REPOPATH=$(pwd)
-    - export DEPLOYPATH=$HOME/jagoskill.com
+    - export DEPLOYPATH=$HOME/public_html/jagoskill.com
     - /bin/bash $REPOPATH/deploy/cpanel-post-deploy.sh

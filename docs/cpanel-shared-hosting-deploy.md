@@ -2,13 +2,13 @@
 
 Panduan ini untuk deploy Laravel app ini ke shared hosting cPanel dengan direktori domain seperti:
 
-- `/home/USERNAME/jagoskill.com`
+- `/home/USERNAME/public_html/jagoskill.com`
 
 ## Model yang direkomendasikan
 
 Gunakan seluruh project di dalam folder domain:
 
-- `/home/USERNAME/jagoskill.com`
+- `/home/USERNAME/public_html/jagoskill.com`
 
 Karena file [root `.htaccess`](D:\rocket\.htaccess) sudah mengarahkan request ke folder `public/`, kita tidak perlu memindahkan isi `public` ke luar folder project.
 
@@ -17,7 +17,7 @@ Karena file [root `.htaccess`](D:\rocket\.htaccess) sudah mengarahkan request ke
 Di hosting, hasil akhirnya sebaiknya seperti ini:
 
 ```text
-/home/USERNAME/jagoskill.com/
+/home/USERNAME/public_html/jagoskill.com/
   app/
   bootstrap/
   config/
@@ -60,7 +60,7 @@ Pakai ini jika menu `Git Version Control` tersedia di cPanel.
 3. Pastikan branch yang dipakai adalah `main`.
 4. Repo ini sudah menyediakan file [`.cpanel.yml`](D:\rocket\.cpanel.yml) dan script [deploy/cpanel-post-deploy.sh](D:\rocket\deploy\cpanel-post-deploy.sh).
 5. Saat tombol `Deploy HEAD Commit` dijalankan di cPanel, source akan disalin ke:
-   `$HOME/jagoskill.com`
+   `$HOME/public_html/jagoskill.com`
 6. Buat atau update `.env` production di folder live `jagoskill.com`.
 7. Jika Composer tersedia di hosting, deploy script akan otomatis menjalankan `composer install --no-dev --optimize-autoloader`.
 
@@ -139,7 +139,7 @@ Jika `APP_KEY` sudah dibuat di lokal dan ingin dipakai ulang, tidak perlu genera
 - Folder clone repository tidak harus sama dengan folder live domain
 - Justru lebih aman jika clone repo berada di luar folder publik/domain
 - Folder live yang dipakai saat ini adalah:
-  `$HOME/jagoskill.com`
+  `$HOME/public_html/jagoskill.com`
 - File `.env` production harus dibuat langsung di folder live, bukan di repo lokal
 
 ## Storage link
