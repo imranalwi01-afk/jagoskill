@@ -18,6 +18,10 @@ mkdir -p "$DEPLOYPATH/resources"
 mkdir -p "$DEPLOYPATH/routes"
 mkdir -p "$DEPLOYPATH/tests"
 
+echo "Deploy started at $(date)" > "$DEPLOYPATH/.deploy-status"
+echo "Repo path: $REPOPATH" >> "$DEPLOYPATH/.deploy-status"
+echo "Target path: $DEPLOYPATH" >> "$DEPLOYPATH/.deploy-status"
+
 # Copy application source while keeping the production .env in place.
 /bin/cp -a "$REPOPATH/app/." "$DEPLOYPATH/app/"
 /bin/cp -a "$REPOPATH/bootstrap/." "$DEPLOYPATH/bootstrap/"
@@ -40,3 +44,5 @@ mkdir -p "$DEPLOYPATH/tests"
 if [ -f "$REPOPATH/.env.example" ]; then
   /bin/cp -a "$REPOPATH/.env.example" "$DEPLOYPATH/.env.example"
 fi
+
+echo "Deploy finished at $(date)" >> "$DEPLOYPATH/.deploy-status"
