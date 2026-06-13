@@ -1,14 +1,1 @@
-.full-width-bar-cta-section {
-  height: 128px;
-  padding: 32px;
-  border-radius: 32px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: var(--secondary);
-}
-@media (max-width: 991px) {
-  .full-width-bar-cta-section {
-    height: auto;
-  }
-}
+.full-width-bar-cta-section{background-color:var(--secondary);background-position:50%;background-repeat:no-repeat;background-size:cover;border-radius:32px;height:128px;padding:32px}@media (max-width:991px){.full-width-bar-cta-section{height:auto}}

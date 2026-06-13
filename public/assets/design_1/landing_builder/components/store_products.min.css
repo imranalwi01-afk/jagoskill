@@ -1,13 +1,1 @@
-.store-products-section {
-  width: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  padding: 54px 0;
-}
-@media (max-width: 991px) {
-  .store-products-section {
-    height: auto;
-    padding: 24px 0;
-  }
-}
+.store-products-section{background-position:50%;background-repeat:no-repeat;background-size:cover;padding:54px 0;width:100%}@media (max-width:991px){.store-products-section{height:auto;padding:24px 0}}

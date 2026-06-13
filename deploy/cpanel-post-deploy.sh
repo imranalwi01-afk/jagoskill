@@ -43,6 +43,23 @@ echo "Target path: $DEPLOYPATH" >> "$DEPLOYPATH/.deploy-status"
 
 if [ -f "$REPOPATH/.env.example" ]; then
   /bin/cp -a "$REPOPATH/.env.example" "$DEPLOYPATH/.env.example"
+  if [ ! -f "$DEPLOYPATH/.env" ]; then
+    /bin/cp -a "$REPOPATH/.env.example" "$DEPLOYPATH/.env"
+  fi
+fi
+
+cd "$DEPLOYPATH"
+
+# Fix directory permissions for Laravel
+chmod -R 775 storage bootstrap/cache
+
+# Install dependencies using composer (checking common cPanel composer locations)
+if command -v composer &> /dev/null; then
+    composer install --no-dev --optimize-autoloader
+    php artisan optimize:clear
+elif [ -f "/opt/cpanel/composer/bin/composer" ]; then
+    /opt/cpanel/composer/bin/composer install --no-dev --optimize-autoloader
+    php artisan optimize:clear
 fi
 
 echo "Deploy finished at $(date)" >> "$DEPLOYPATH/.deploy-status"

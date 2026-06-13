@@ -1,16 +1,1 @@
-.free-courses-section {
-  width: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.free-courses-section__cta-icon {
-  min-width: 140px;
-  width: 140px;
-  max-width: 140px;
-  height: 140px;
-}
-.free-courses-section__cta-icon img {
-  max-width: 100%;
-  max-height: 100%;
-}
+.free-courses-section{background-position:50%;background-repeat:no-repeat;background-size:cover;width:100%}.free-courses-section__cta-icon{height:140px;max-width:140px;min-width:140px;width:140px}.free-courses-section__cta-icon img{max-height:100%;max-width:100%}
