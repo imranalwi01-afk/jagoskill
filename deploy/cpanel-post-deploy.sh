@@ -22,27 +22,31 @@ echo "Deploy started at $(date)" > "$DEPLOYPATH/.deploy-status"
 echo "Repo path: $REPOPATH" >> "$DEPLOYPATH/.deploy-status"
 echo "Target path: $DEPLOYPATH" >> "$DEPLOYPATH/.deploy-status"
 
-# Copy application source while keeping the production .env in place.
-/bin/cp -a "$REPOPATH/app/." "$DEPLOYPATH/app/"
-/bin/cp -a "$REPOPATH/bootstrap/." "$DEPLOYPATH/bootstrap/"
-/bin/cp -a "$REPOPATH/config/." "$DEPLOYPATH/config/"
-/bin/cp -a "$REPOPATH/database/." "$DEPLOYPATH/database/"
-/bin/cp -a "$REPOPATH/lang/." "$DEPLOYPATH/lang/"
-/bin/cp -a "$REPOPATH/public/." "$DEPLOYPATH/public/"
-/bin/cp -a "$REPOPATH/resources/." "$DEPLOYPATH/resources/"
-/bin/cp -a "$REPOPATH/routes/." "$DEPLOYPATH/routes/"
-/bin/cp -a "$REPOPATH/tests/." "$DEPLOYPATH/tests/"
-/bin/cp -a "$REPOPATH/artisan" "$DEPLOYPATH/"
-/bin/cp -a "$REPOPATH/composer.json" "$DEPLOYPATH/"
-/bin/cp -a "$REPOPATH/composer.lock" "$DEPLOYPATH/"
-/bin/cp -a "$REPOPATH/package.json" "$DEPLOYPATH/"
-/bin/cp -a "$REPOPATH/package-lock.json" "$DEPLOYPATH/"
-/bin/cp -a "$REPOPATH/vite.config.js" "$DEPLOYPATH/"
-/bin/cp -a "$REPOPATH/webpack.mix.js" "$DEPLOYPATH/"
-/bin/cp -a "$REPOPATH/.htaccess" "$DEPLOYPATH/"
+# Only copy files if the repo path is different from the deploy path
+if [ "$REPOPATH" != "$DEPLOYPATH" ]; then
+  /bin/cp -a "$REPOPATH/app/." "$DEPLOYPATH/app/"
+  /bin/cp -a "$REPOPATH/bootstrap/." "$DEPLOYPATH/bootstrap/"
+  /bin/cp -a "$REPOPATH/config/." "$DEPLOYPATH/config/"
+  /bin/cp -a "$REPOPATH/database/." "$DEPLOYPATH/database/"
+  /bin/cp -a "$REPOPATH/lang/." "$DEPLOYPATH/lang/"
+  /bin/cp -a "$REPOPATH/public/." "$DEPLOYPATH/public/"
+  /bin/cp -a "$REPOPATH/resources/." "$DEPLOYPATH/resources/"
+  /bin/cp -a "$REPOPATH/routes/." "$DEPLOYPATH/routes/"
+  /bin/cp -a "$REPOPATH/tests/." "$DEPLOYPATH/tests/"
+  /bin/cp -a "$REPOPATH/artisan" "$DEPLOYPATH/"
+  /bin/cp -a "$REPOPATH/composer.json" "$DEPLOYPATH/"
+  /bin/cp -a "$REPOPATH/composer.lock" "$DEPLOYPATH/"
+  /bin/cp -a "$REPOPATH/package.json" "$DEPLOYPATH/"
+  /bin/cp -a "$REPOPATH/package-lock.json" "$DEPLOYPATH/"
+  /bin/cp -a "$REPOPATH/vite.config.js" "$DEPLOYPATH/"
+  /bin/cp -a "$REPOPATH/webpack.mix.js" "$DEPLOYPATH/"
+  /bin/cp -a "$REPOPATH/.htaccess" "$DEPLOYPATH/"
+fi
 
 if [ -f "$REPOPATH/.env.example" ]; then
-  /bin/cp -a "$REPOPATH/.env.example" "$DEPLOYPATH/.env.example"
+  if [ "$REPOPATH" != "$DEPLOYPATH" ]; then
+    /bin/cp -a "$REPOPATH/.env.example" "$DEPLOYPATH/.env.example"
+  fi
   if [ ! -f "$DEPLOYPATH/.env" ]; then
     /bin/cp -a "$REPOPATH/.env.example" "$DEPLOYPATH/.env"
   fi
