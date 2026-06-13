@@ -53,13 +53,11 @@ cd "$DEPLOYPATH"
 # Fix directory permissions for Laravel
 chmod -R 775 storage bootstrap/cache
 
-# Install dependencies using composer (checking common cPanel composer locations)
-if command -v composer &> /dev/null; then
-    composer install --no-dev --optimize-autoloader
-    php artisan optimize:clear
-elif [ -f "/opt/cpanel/composer/bin/composer" ]; then
-    /opt/cpanel/composer/bin/composer install --no-dev --optimize-autoloader
-    php artisan optimize:clear
-fi
+# Install dependencies using composer (downloading composer locally to ensure it works)
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php composer-setup.php --quiet
+php composer.phar install --no-dev --optimize-autoloader
+rm composer-setup.php
+php artisan optimize:clear
 
 echo "Deploy finished at $(date)" >> "$DEPLOYPATH/.deploy-status"
