@@ -38,3 +38,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+/dist_jagoskill/
+jagoskill_deploy.zip
+public/store.zip
+tmp/vendor-upload.zip

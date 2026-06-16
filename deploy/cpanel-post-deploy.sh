@@ -2,7 +2,7 @@
 
 set -e
 
-DEPLOYPATH="${DEPLOYPATH:-$HOME/public_html/jagoskill.com}"
+DEPLOYPATH="${DEPLOYPATH:-$HOME/jagoskill.com}"
 REPOPATH="${REPOPATH:-$(pwd)}"
 
 mkdir -p "$DEPLOYPATH"
