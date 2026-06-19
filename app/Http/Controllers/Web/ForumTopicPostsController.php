@@ -29,7 +29,7 @@ class ForumTopicPostsController extends Controller
     {
         $forumsStatus = getForumsGeneralSettings('forums_status');
 
-        if (empty($forumsStatus) or $forumsStatus == '0') {
+        if ($forumsStatus === false or (string)$forumsStatus === '0') {
             abort(403);
         }
     }
